@@ -1,0 +1,6 @@
+# Python dependencies for adaptive routing project
+# Note: mininet and p4-related packages are typically installed system-wide
+# via apt or from source, not via pip.
+
+scapy>=2.5.0
+networkx>=3.0
