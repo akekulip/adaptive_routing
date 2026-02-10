@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Adaptive Routing with P4 on BMv2
 
 A P4-based adaptive load-balancing system that dynamically distributes traffic across multiple equal-cost paths based on real-time link utilization, improving on static ECMP behavior. Tested on a 6-switch Mininet topology with BMv2 `simple_switch`.
@@ -206,5 +207,5 @@ sudo python3 tests/test_connectivity.py
 ```
 
 ## License
-
-MIT
+# adaptive_routing
+>>>>>>> 16f2364eed566a324b5d3c3b2c7665f047055a3
