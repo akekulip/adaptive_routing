@@ -119,16 +119,22 @@ class PeriodicReset:
 
 
 def parse_iperf_json(raw):
+    """Extract *received* throughput from iperf3 -J output (UDP or TCP)."""
     try:
         d = json.loads(raw)
-        return d['end']['sum']['bits_per_second'] / 1e6
+        end = d.get('end', {})
+        # UDP: prefer sum_received (actual bytes that arrived at server)
+        if 'sum_received' in end:
+            return end['sum_received']['bits_per_second'] / 1e6
+        # TCP: sum_sent is meaningful
+        if 'sum_sent' in end:
+            return end['sum_sent']['bits_per_second'] / 1e6
+        # Fallback
+        if 'sum' in end:
+            return end['sum']['bits_per_second'] / 1e6
     except Exception:
         pass
-    try:
-        d = json.loads(raw)
-        return d['end']['sum_received']['bits_per_second'] / 1e6
-    except Exception:
-        return 0.0
+    return 0.0
 
 # ---------------------------------------------------------------------------
 # Scenario
